@@ -1,16 +1,30 @@
-# This is a sample Python script.
+# Final Project (Team)
+# Coded by Briely Gunn, Jacob Goncharenko, and Caleb Harding
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import final_db_functions
 
+# Connects to and opens the database
+final_db_functions.get_connection()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# Creates the student table
+final_db_functions.create_student_table()
 
+final_db_functions.add_student(1234, "Briely Gunn")
+final_db_functions.add_student(2234, "Jacob Goncharenko")
+final_db_functions.add_student(3234, "Caleb Harding")
+# student for row 4
+# student for row 5
+# student for row 6
+# student for row 7
+# student for row 8
+# student for row 9
+# student for row 10
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# (We still need to add more students to these rows^)
+# (You guys can add more rows here with the add_student function)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Gets the student's information and prints it
+final_db_functions.get_students()
+
+# Closes the database
+final_db_functions.close()
