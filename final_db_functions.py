@@ -31,6 +31,9 @@ def create_student_table():
     # Commits the table to the database
     connection.commit()
 
+    # Closes the database
+    connection.close()
+
 
 # Function to add a student to the student table
 
@@ -48,7 +51,11 @@ def add_student(student_id: int, student_name: str):
     # Commits the list to the database
     connection.commit()
 
+    # Closes the database
+    connection.close()
+
 # (Jacob, you can put any of your functions here)
+
 
 # (Caleb, you can put any of your functions here)
 
@@ -61,12 +68,3 @@ def get_students():
     # Selects all the students in the table and prints them
     for row in cursor.execute("select * from students"):
         print(row)
-
-
-# Function to close the database
-def close():
-    # Uses variables to connect to the database
-    cursor, connection = get_connection()
-
-    # Closes the database
-    connection.close()

@@ -25,6 +25,3 @@ final_db_functions.add_student(3234, "Caleb Harding")
 
 # Gets the student's information and prints it
 final_db_functions.get_students()
-
-# Closes the database
-final_db_functions.close()
