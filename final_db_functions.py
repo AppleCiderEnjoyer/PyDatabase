@@ -53,13 +53,13 @@ def add_student(student_id: int, student_name: str):
 # (Caleb, you can put any of your functions here)
 
 
-# Function to get the cities in the city table and print them
-def get_student():
+# Function to get the students in the student table and print them
+def get_students():
     # Uses variables to connect to the database
     cursor, connection = get_connection()
 
-    # Selects all the cities in the table and prints them
-    for row in cursor.execute("select * from city"):
+    # Selects all the students in the table and prints them
+    for row in cursor.execute("select * from students"):
         print(row)
 
 
