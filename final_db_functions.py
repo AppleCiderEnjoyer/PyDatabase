@@ -24,9 +24,18 @@ def create_student_table():
     # Uses variables to connect to the database
     cursor, connection = get_connection()
 
+    # Removes table if it already exists
+    cursor.execute("DROP TABLE IF EXISTS students")
+
     # Adds the student table to the database
-    cursor.execute(str("create table student "
-                       "(student_id text primary key, student_name text)"))
+    cursor.execute("CREATE TABLE students "
+                   "(student_id INTEGER PRIMARY KEY, "
+                   "student_name TEXT, "
+                   "student_age INTEGER, "
+                   "student_gender TEXT, "
+                   "student_country TEXT, "
+                   "student_timezone TEXT, "
+                   "student_email TEXT)")
 
     # Commits the table to the database
     connection.commit()
@@ -38,15 +47,15 @@ def create_student_table():
 # Function to add a student to the student table
 
 # (You guys can add more columns here to the add_student function)
-def add_student(student_id: int, student_name: str):
+def add_student(student_id: int, student_name: str, student_age: int, student_gender: str, student_country: str, student_timezone: str, student_email: str):
     # Uses variables to connect to the database
     cursor, connection = get_connection()
 
     # Creates a list containing the student information
-    student_info = [student_id, student_name]
+    student_info = [student_id, student_name, student_age, student_gender, student_country, student_timezone, student_email]
 
     # Adds the list to the student table
-    cursor.execute("insert into student values (?,?,?)", student_info)
+    cursor.execute("insert into students values (?,?,?,?,?,?,?)", student_info)
 
     # Commits the list to the database
     connection.commit()
