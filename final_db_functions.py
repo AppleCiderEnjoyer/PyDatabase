@@ -47,12 +47,14 @@ def create_student_table():
 # Function to add a student to the student table
 
 # (You guys can add more columns here to the add_student function)
-def add_student(student_id: int, student_name: str, student_age: int, student_gender: str, student_country: str, student_timezone: str, student_email: str):
+def add_student(student_id: int, student_name: str, student_age: int, student_gender: str,
+                student_country: str, student_timezone: str, student_email: str):
     # Uses variables to connect to the database
     cursor, connection = get_connection()
 
     # Creates a list containing the student information
-    student_info = [student_id, student_name, student_age, student_gender, student_country, student_timezone, student_email]
+    student_info = [student_id, student_name, student_age, student_gender,
+                    student_country, student_timezone, student_email]
 
     # Adds the list to the student table
     cursor.execute("insert into students values (?,?,?,?,?,?,?)", student_info)
@@ -63,10 +65,10 @@ def add_student(student_id: int, student_name: str, student_age: int, student_ge
     # Closes the database
     connection.close()
 
-# (Jacob, you can put any of your functions here)
+# (Jacob, you can put any of your functions here if we need them in the future)
 
 
-# (Caleb, you can put any of your functions here)
+# (Caleb, you can put any of your functions here if we need them in the future)
 
 
 # Function to get the students in the student table and print them
