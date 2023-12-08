@@ -1,11 +1,10 @@
-# Final Project (Team) (Functions)
-# Coded by Briely Gunn, Jacob Goncharenko, and Caleb Harding
+# Final Project Week 13 (Team) (Functions)
+# Coded by Briely Gunn and Jacob Goncharenko
 
 import sqlite3
 
-# Lines 6-32 coded by: Briely Gunn
 
-
+# Coded by Briely Gunn
 # Function to connect to the final_project database and create a cursor
 def get_connection():
 
@@ -19,6 +18,7 @@ def get_connection():
     return cursor, connection
 
 
+# Coded by Jacob Goncharenko
 # Function to create the student table and add it to the database
 def create_student_table():
     # Uses variables to connect to the database
@@ -44,9 +44,8 @@ def create_student_table():
     connection.close()
 
 
+# Coded by both of us
 # Function to add a student to the student table
-
-# (You guys can add more columns here to the add_student function)
 def add_student(student_id: int, student_name: str, student_age: int, student_gender: str,
                 student_country: str, student_timezone: str, student_email: str):
     # Uses variables to connect to the database
@@ -64,11 +63,6 @@ def add_student(student_id: int, student_name: str, student_age: int, student_ge
 
     # Closes the database
     connection.close()
-
-# (Jacob, you can put any of your functions here if we need them in the future)
-
-
-# (Caleb, you can put any of your functions here if we need them in the future)
 
 
 # Function to get the students in the student table and print them
