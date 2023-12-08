@@ -1,5 +1,5 @@
-# Final Project Week 13 (Team)
-# Coded by Briely Gunn and Jacob Goncharenko
+# Final Project 13 (Team)
+# Coded by Briely Gunn, Jacob Goncharenko, and Caleb Harding
 
 import final_db_functions
 
@@ -8,7 +8,7 @@ final_db_functions.get_connection()
 
 # Creates the student table
 final_db_functions.create_student_table()
-
+# (NOTE) - Please put in your correct age below, if you know the ages of the other students please fill them in
 final_db_functions.add_student(1, "Briely Gunn", 16, "male",
                                "United States", "America/Chicago",
                                "bcgunn@students.unwsp.edu")
@@ -36,18 +36,12 @@ final_db_functions.add_student(6, "Joshua Bystrom", 17, "male",
 final_db_functions.add_student(7, "Mark Swanson", 17, "male",
                                "United States", "America/Chicago",
                                "mcswanson2@students.unwsp.edu")
+# student for row 8
+# student for row 9
+# student for row 10
 
-final_db_functions.add_student(8, "Joseph Steinberg", 17, "male",
-                               "United States", "America/Chicago",
-                               "jhsteinberg@students.unwsp.edu")
-
-final_db_functions.add_student(9, "Esteban Lozano", 17, "male",
-                               "United States", "America/Chicago",
-                               "enlozano@unwsp.edu")
-
-final_db_functions.add_student(10, "Dylan Weakly", 17, "male",
-                               "United States", "America/Chicago",
-                               "dcweakly@students.unwsp.edu")
+# (We still need to add more students to these rows^)
+# (Caleb could you add more rows here with the add_student function^)
 
 # Gets the students' information and prints it
 final_db_functions.get_students()
