@@ -1,5 +1,5 @@
 # Final Project 13 (Team) (Functions)
-# Coded by Briely Gunn, Jacob Goncharenko, and Caleb Harding
+# Coded by Briely Gunn and Jacob Goncharenko
 
 import sqlite3
 
@@ -43,8 +43,6 @@ def create_student_table():
 
 
 # Function to add a student to the student table
-
-# (Caleb you can add more columns here to the add_student function if you would like (it is not required though))
 def add_student(student_id: int, student_name: str, student_age: int, student_gender: str,
                 student_country: str, student_timezone: str, student_email: str):
     # Uses variables to connect to the database
