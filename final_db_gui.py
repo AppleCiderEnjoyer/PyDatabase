@@ -169,11 +169,8 @@ class DBGUI:
     # Method to add a new database entry when the "Add Database Entry" button is clicked
     def add_db_entry(self):
 
-        # Gets the student_id numbers to get an accurate id for the new student
-        self.student_ids = (str(final_db_functions.get_student_ids()).count(","))
-
         # Calls the add_students function to add a new student to the database
-        final_db_functions.add_student(int(self.student_ids / 2) + 2, str(), int(), str(), str(), str(), str())
+        final_db_functions.add_student(str(), int(), str(), str(), str(), str())
 
         # Gets the updated database info and formats it
         self.db_info = str(final_db_functions.get_students())

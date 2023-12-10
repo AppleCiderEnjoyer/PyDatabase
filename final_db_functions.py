@@ -91,9 +91,9 @@ def get_students():
 def get_student_ids():
     cursor, connection = get_connection()
 
-    student_id = []
+    student_ids = []
 
     for row in cursor.execute("select student_id from students"):
-        student_id.append(row)
+        student_ids.append(row)
 
-    return student_id
+    return student_ids
