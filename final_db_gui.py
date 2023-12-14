@@ -4,6 +4,10 @@
 import tkinter
 import final_db_functions
 
+# Text justification variable for GUI spacing
+GUI_justification = 20
+GUI_email_justification = 40
+
 
 # Intro GUI for when the program first runs
 class IntroGUI:
@@ -67,7 +71,7 @@ class IntroGUI:
         DBGUI()
 
 
-# GUI containing the database information
+# GUI for displaying all the database information
 class DBGUI:
     def __init__(self):
         self.window = tkinter.Tk()
@@ -75,9 +79,13 @@ class DBGUI:
         # Prints the title of the window
         self.window.title("Group 5 Final Project")
 
+        # Initialized Widgets
+
+        # Frames
         self.text_frame = tkinter.Frame(self.window)
         self.db_frame = tkinter.Frame(self.window)
         self.button_frame = tkinter.Frame(self.window)
+        self.add_db_entry_frame = tkinter.Frame(self.window)
         self.exit_frame = tkinter.Frame(self.window)
 
         # Text
@@ -87,13 +95,13 @@ class DBGUI:
         # Database text
         # Formats the database columns
         self.db_text = tkinter.Label(self.db_frame,
-                                     text=f" ID#:"
-                                          "\t Name:"
-                                          "\t\t Age:"
+                                     text=f"ID#:"
+                                          "\t Name:".ljust(GUI_justification, " ") +
+                                          "\t Age:"
                                           "\t Gender:"
-                                          "\t Country:"
-                                          "\t\t Timezone:"
-                                          "\t\t Email:\t\n",
+                                          "\t Country:".ljust(GUI_justification, " ") +
+                                          "\t\t Timezone:".ljust(GUI_justification, " ") +
+                                          "\t Email:\n".ljust(GUI_email_justification, " "),
                                      justify='left',
                                      anchor='w', width=100)
 
@@ -140,11 +148,122 @@ class DBGUI:
         self.remove_db_entry_button.pack()
         self.exit_button.pack()
 
+        # Frame packing
         # Adds the frames to the GUI
         self.text_frame.pack()
         self.db_frame.pack()
         self.button_frame.pack()
         self.exit_frame.pack()
+
+        # Lines 155-255 Coded By: Briely Gunn
+        # Widgets for adding a student to the database
+
+        # Widgets for the "add_student" method
+        # Adds the new student's name textbox to the GUI
+        self.add_name_textbox = tkinter.Entry(self.add_db_entry_frame,
+                                              width=15)
+
+        # Adds the new student's name text to the GUI
+        self.add_name_text = tkinter.Label(self.add_db_entry_frame,
+                                           text="Student's Name: ")
+
+        # Adds the new student's age textbox to the GUI
+        self.add_age_textbox = tkinter.Entry(self.add_db_entry_frame,
+                                             width=3)
+
+        # Adds the new student's age text to the GUI
+        self.add_age_text = tkinter.Label(self.add_db_entry_frame,
+                                          text="Student's Age: ")
+
+        # Creates the variable for the upcoming radiobuttons
+        self.radio_button_var = tkinter.IntVar()
+        self.radio_button_var.set(1)
+
+        # Adds the new student's gender radiobutton (male) to the GUI
+        self.add_gender_male_radiobutton = tkinter.Radiobutton(self.add_db_entry_frame,
+                                                               value=1,
+                                                               text="Male",
+                                                               width=10,
+                                                               variable=self.radio_button_var)
+
+        # Adds the new student's gender radiobutton (female) to the GUI
+        self.add_gender_female_radiobutton = tkinter.Radiobutton(self.add_db_entry_frame,
+                                                                 value=2,
+                                                                 text="Female",
+                                                                 width=10,
+                                                                 variable=self.radio_button_var)
+
+        # Adds the new student's gender text to the GUI
+        self.add_gender_text = tkinter.Label(self.add_db_entry_frame,
+                                             text="Student's Gender: ")
+
+        # Adds the new student's country textbox to the GUI
+        self.add_country_textbox = tkinter.Entry(self.add_db_entry_frame,
+                                                 width=15)
+
+        # Adds the new student's country text to the GUI
+        self.add_country_text = tkinter.Label(self.add_db_entry_frame,
+                                              text="Student's Country: ")
+
+        # Adds the new student's timezone textbox to the GUI
+        self.add_timezone_textbox = tkinter.Entry(self.add_db_entry_frame,
+                                                  width=15)
+
+        # Adds the new student's timezone text to the GUI
+        self.add_timezone_text = tkinter.Label(self.add_db_entry_frame,
+                                               text="Student's Timezone: ")
+
+        # Adds the new student's email textbox to the GUI
+        self.add_email_textbox = tkinter.Entry(self.add_db_entry_frame,
+                                               width=25)
+
+        # Adds the new student's email text to the GUI
+        self.add_email_text = tkinter.Label(self.add_db_entry_frame,
+                                            text="Student's Email: ")
+
+        # Creates a button to add a student to the database
+        self.add_student_button = tkinter.Button(self.add_db_entry_frame,
+                                                 text="Add Student",
+                                                 command=self.add_student)
+
+        # Packing
+
+        # Adds the text, textboxes, radiobuttons, and standard button for the "add_student" method to the GUI
+        # Adds the name text and textbox to the GUI
+        self.add_name_text.pack()
+        self.add_name_textbox.pack()
+
+        # Adds the age text and textbox to the GUI
+        self.add_age_text.pack()
+        self.add_age_textbox.pack()
+
+        # Adds the gender text and radiobuttons to the GUI
+        self.add_gender_text.pack()
+        self.add_gender_male_radiobutton.pack()
+        self.add_gender_female_radiobutton.pack()
+
+        # Adds the country text and textbox to the GUI
+        self.add_country_text.pack()
+        self.add_country_textbox.pack()
+
+        # Adds the timezone text and textbox to the GUI
+        self.add_timezone_text.pack()
+        self.add_timezone_textbox.pack()
+
+        # Adds the email text and textbox to the GUI
+        self.add_email_text.pack()
+        self.add_email_textbox.pack()
+
+        # Adds the "Add Student" button to the GUI
+        self.add_student_button.pack()
+
+        # Lines ???-??? Coded By:
+        # Widgets for editing a student in the database
+        # (Jacob you can put your GUI frame for you method here)
+
+        # Lines ???-??? Coded By:
+        # Widgets for removing a student from the database
+        # (Caleb you can put your GUI frame for your method here)
 
         # Mainloop to make the GUI work
         tkinter.mainloop()
@@ -152,7 +271,7 @@ class DBGUI:
     # Method to format the database table into readable text
     def db_str_formatting(self, db_string):
         self.db_info_formatted = (str(db_string)
-                                  .replace("),", "\n")
+                                  .replace("), ", "\n")
                                   .replace("(", "")
                                   .replace(")", "")
                                   .replace("'", "")
@@ -161,16 +280,22 @@ class DBGUI:
                                   .replace(",", "\t"))
         return self.db_info_formatted
 
-    # Method to organize the database tables
-    def db_organizing(self):
-        # Temp code
-        self.window.destroy()
-
-    # Method to add a new database entry when the "Add Database Entry" button is clicked
-    def add_db_entry(self):
+    # Coded by: Briely Gunn
+    # Method to add a student to the database and print it to the GUI when the "Add Student" button is clicked
+    def add_student(self):
+        # Gets the new student's gender before they are added to the database
+        if self.radio_button_var.get() == 1:
+            self.student_gender = "male"
+        else:
+            self.student_gender = "female"
 
         # Calls the add_students function to add a new student to the database
-        final_db_functions.add_student(str(), int(), str(), str(), str(), str())
+        final_db_functions.add_student(str(self.add_name_textbox.get().ljust(GUI_justification, " ")),
+                                       int(self.add_age_textbox.get()),
+                                       str(self.student_gender),
+                                       str(self.add_country_textbox.get().ljust(GUI_justification, " ")),
+                                       str(self.add_timezone_textbox.get().ljust(GUI_justification, " ")),
+                                       str(self.add_email_textbox.get().ljust(GUI_email_justification, " ")))
 
         # Gets the updated database info and formats it
         self.db_info = str(final_db_functions.get_students())
@@ -188,10 +313,29 @@ class DBGUI:
         # Packs the database info to the GUI
         self.db_entries.pack()
 
+        # Unpacks the add_db_entry_frame for a cleaner GUI
+        self.add_db_entry_frame.pack_forget()
+
+        # Repacks the exit and button frames
+        self.button_frame.pack()
+        self.exit_frame.pack()
+
+    # Method to prepare for a new database entry when the "Add Database Entry" button is clicked
+    def add_db_entry(self):
+
+        # Unpacks the exit and button frames
+        self.button_frame.pack_forget()
+        self.exit_frame.pack_forget()
+
+        # Packs the add_db_entry_frame
+        self.add_db_entry_frame.pack()
+
+    # This is the method you will be working on, Jacob (You can replace this comment with somthing like "Coded by: Jacob Goncharenko" once you finish it)
     # Method to edit an existing database entry when the "Edit Database Entry" button is clicked
     def edit_db_entry(self):
         self.button_frame.destroy()
 
+    # This is the method you will be working on, Caleb (You can replace this comment with somthing like "Coded by: Caleb Harding" once you finish it)
     def remove_db_entry(self):
         self.button_frame.destroy()
 

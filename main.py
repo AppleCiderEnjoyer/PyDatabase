@@ -4,6 +4,10 @@
 import final_db_functions
 import final_db_gui
 
+# Text justification variable for GUI spacing
+GUI_justification = 20
+GUI_email_justification = 40
+
 # Connects to and opens the database
 final_db_functions.get_connection()
 
@@ -11,45 +15,75 @@ final_db_functions.get_connection()
 final_db_functions.create_student_table()
 
 # Adds the students to the database
-final_db_functions.add_student("Briely Gunn", 16, "male",
-                               "United States", "America/Chicago",
-                               "bcgunn@students.unwsp.edu")
+final_db_functions.add_student("Briely Gunn".ljust(GUI_justification, " "),
+                               16,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "bcgunn@students.unwsp.edu".ljust(GUI_email_justification, " "))
 
-final_db_functions.add_student("Jacob Goncharenko", 17, "male",
-                               "United States", "America/Chicago",
-                               "jdgoncharenko@students.unwsp.edu")
+final_db_functions.add_student("Jacob Goncharenko".ljust(GUI_justification, " "),
+                               17,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "jdgoncharenko@students.unwsp.edu".ljust(GUI_email_justification, " "))
 
-final_db_functions.add_student("Caleb Harding", 17, "male",
-                               "United States", "America/Chicago",
-                               "crbystrom@students.unwsp.edu")
+final_db_functions.add_student("Caleb Harding".ljust(GUI_justification, " "),
+                               17,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "crbystrom@students.unwsp.edu".ljust(GUI_email_justification, " "))
 
-final_db_functions.add_student("Jacob Combs", 17, "male",
-                               "United States", "America/Chicago",
-                               "jlcombs2@students.unwsp.edu")
+final_db_functions.add_student("Jacob Combs".ljust(GUI_justification, " "),
+                               17,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "jlcombs2@students.unwsp.edu".ljust(GUI_email_justification, " "))
 
-final_db_functions.add_student("Weston Collins", 17, "male",
-                               "United States", "America/Chicago",
-                               "wtcollins@students.unwsp.edu")
+final_db_functions.add_student("Weston Collins".ljust(GUI_justification, " "),
+                               17,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "wtcollins@students.unwsp.edu".ljust(GUI_email_justification, " "))
 
-final_db_functions.add_student("Joshua Bystrom", 17, "male",
-                               "United States", "America/Chicago",
-                               "jrbystrom@students.unwsp.edu")
+final_db_functions.add_student("Joshua Bystrom".ljust(GUI_justification, " "),
+                               17,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "jrbystrom@students.unwsp.edu".ljust(GUI_email_justification, " "))
 
-final_db_functions.add_student("Mark Swanson", 17, "male",
-                               "United States", "America/Chicago",
-                               "mcswanson2@students.unwsp.edu")
+final_db_functions.add_student("Mark Swanson".ljust(GUI_justification, " "),
+                               17,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "mcswanson2@students.unwsp.edu".ljust(GUI_email_justification, " "))
 
-final_db_functions.add_student("Joseph Steinberg", 17, "male",
-                               "United States", "America/Chicago",
-                               "jhsteinberg@students.unwsp.edu")
+final_db_functions.add_student("Joseph Steinberg".ljust(GUI_justification, " "),
+                               17,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "jhsteinberg@students.unwsp.edu".ljust(GUI_email_justification, " "))
 
-final_db_functions.add_student("Esteban Lozano", 17, "male",
-                               "United States", "America/Chicago",
-                               "enlozano@unwsp.edu")
+final_db_functions.add_student("Esteban Lozano".ljust(GUI_justification, " "),
+                               17,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "enlozano@unwsp.edu".ljust(GUI_email_justification, " "))
 
-final_db_functions.add_student("Dylan Weakly", 17, "male",
-                               "United States", "America/Chicago",
-                               "dcweakly@students.unwsp.edu")
+final_db_functions.add_student("Dylan Weakly".ljust(GUI_justification, " "),
+                               17,
+                               "male",
+                               "United States".ljust(GUI_justification, " "),
+                               "America/Chicago".ljust(GUI_justification, " "),
+                               "dcweakly@students.unwsp.edu".ljust(GUI_email_justification, " "))
 
 # Gets the students' information and prints it
 final_db_functions.get_students()
