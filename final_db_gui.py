@@ -5,8 +5,8 @@ import tkinter
 import final_db_functions
 
 # Text justification variable for GUI spacing
-GUI_justification = 20
-GUI_email_justification = 40
+GUI_text_justification = 20
+GUI_email_text_justification = 40
 
 
 # Intro GUI for when the program first runs
@@ -86,6 +86,8 @@ class DBGUI:
         self.db_frame = tkinter.Frame(self.window)
         self.button_frame = tkinter.Frame(self.window)
         self.add_db_entry_frame = tkinter.Frame(self.window)
+        self.edit_db_entry_frame = tkinter.Frame(self.window)
+        self.remove_db_entry_frame = tkinter.Frame(self.window)
         self.exit_frame = tkinter.Frame(self.window)
 
         # Text
@@ -96,12 +98,12 @@ class DBGUI:
         # Formats the database columns
         self.db_text = tkinter.Label(self.db_frame,
                                      text=f"ID#:"
-                                          "\t Name:".ljust(GUI_justification, " ") +
+                                          "\t Name:".ljust(GUI_text_justification, " ") +
                                           "\t Age:"
                                           "\t Gender:"
-                                          "\t Country:".ljust(GUI_justification, " ") +
-                                          "\t\t Timezone:".ljust(GUI_justification, " ") +
-                                          "\t Email:\n".ljust(GUI_email_justification, " "),
+                                          "\t Country:".ljust(GUI_text_justification, " ") +
+                                          "\t\t Timezone:".ljust(GUI_text_justification, " ") +
+                                          "\t Email:\n".ljust(GUI_email_text_justification, " "),
                                      justify='left',
                                      anchor='w', width=100)
 
@@ -155,10 +157,10 @@ class DBGUI:
         self.button_frame.pack()
         self.exit_frame.pack()
 
-        # Lines 155-255 Coded By: Briely Gunn
+        # Lines 160-260 Coded By: Briely Gunn
         # Widgets for adding a student to the database
 
-        # Widgets for the "add_student" method
+        # Widgets for the "add_db_entry" and "add_student" methods
         # Adds the new student's name textbox to the GUI
         self.add_name_textbox = tkinter.Entry(self.add_db_entry_frame,
                                               width=15)
@@ -290,12 +292,12 @@ class DBGUI:
             self.student_gender = "female"
 
         # Calls the add_students function to add a new student to the database
-        final_db_functions.add_student(str(self.add_name_textbox.get().ljust(GUI_justification, " ")),
+        final_db_functions.add_student(str(self.add_name_textbox.get().ljust(GUI_text_justification, " ")),
                                        int(self.add_age_textbox.get()),
                                        str(self.student_gender),
-                                       str(self.add_country_textbox.get().ljust(GUI_justification, " ")),
-                                       str(self.add_timezone_textbox.get().ljust(GUI_justification, " ")),
-                                       str(self.add_email_textbox.get().ljust(GUI_email_justification, " ")))
+                                       str(self.add_country_textbox.get().ljust(GUI_text_justification, " ")),
+                                       str(self.add_timezone_textbox.get().ljust(GUI_text_justification, " ")),
+                                       str(self.add_email_textbox.get().ljust(GUI_email_text_justification, " ")))
 
         # Gets the updated database info and formats it
         self.db_info = str(final_db_functions.get_students())
