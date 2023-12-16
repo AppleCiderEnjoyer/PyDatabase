@@ -106,7 +106,20 @@ class DBGUI:
         self.text_frame = tkinter.Frame(self.window)
         self.db_frame = tkinter.Frame(self.window)
         self.button_frame = tkinter.Frame(self.window)
+
+        # Creates a frame for entering entries
         self.add_db_entry_frame = tkinter.Frame(self.window)
+
+        # Creates the frames for the different fields within the entry frame
+        self.add_name_frame = tkinter.Frame(self.add_db_entry_frame)
+        self.add_age_frame = tkinter.Frame(self.add_db_entry_frame)
+        self.add_gender_frame = tkinter.Frame(self.add_db_entry_frame)
+        self.add_country_frame = tkinter.Frame(self.add_db_entry_frame)
+        self.add_timezone_frame = tkinter.Frame(self.add_db_entry_frame)
+        self.add_email_frame = tkinter.Frame(self.add_db_entry_frame)
+        self.add_student_frame = tkinter.Frame(self.add_db_entry_frame)
+
+        # Creates the frames that go under the add database entry frame
         self.edit_db_entry_frame = tkinter.Frame(self.window)
         self.remove_db_entry_frame = tkinter.Frame(self.window)
         self.exit_frame = tkinter.Frame(self.window)
@@ -172,10 +185,21 @@ class DBGUI:
         self.exit_button.pack()
 
         # Frame packing
-        # Adds the frames to the GUI
+        # Adds the different frames to the GUI
         self.text_frame.pack()
-        self.db_frame.pack(side='right', padx=20)
-        self.add_db_entry_frame.pack(pady=20)
+        self.db_frame.pack(side='right', padx=20, pady=20)
+
+        # Packs the frames for adding an entry to the database
+        self.add_db_entry_frame.pack(padx=20, pady=25)
+        self.add_name_frame.pack(anchor='w')
+        self.add_age_frame.pack(anchor='w')
+        self.add_gender_frame.pack(anchor='w')
+        self.add_country_frame.pack(anchor='w')
+        self.add_timezone_frame.pack(anchor='w')
+        self.add_email_frame.pack(anchor='w')
+        self.add_student_frame.pack()
+
+        # Packs the rest of the widgets
         self.exit_frame.pack(side='bottom', pady=20)
         self.button_frame.pack(side='bottom', padx=20)
 
@@ -184,69 +208,71 @@ class DBGUI:
 
         # Widgets for the "add_student" method
         # Adds the new student's name textbox to the GUI
-        self.add_name_textbox = tkinter.Entry(self.add_db_entry_frame,
+        self.add_name_textbox = tkinter.Entry(self.add_name_frame,
                                               width=15)
 
         # Adds the new student's name text to the GUI
-        self.add_name_text = tkinter.Label(self.add_db_entry_frame,
-                                           text="Student's Name: ")
+        self.add_name_text = tkinter.Label(self.add_name_frame,
+                                           text=gui_str_justification("Student's Name:"))
 
         # Adds the new student's age textbox to the GUI
-        self.add_age_textbox = tkinter.Entry(self.add_db_entry_frame,
+        self.add_age_textbox = tkinter.Entry(self.add_age_frame,
                                              width=3)
 
         # Adds the new student's age text to the GUI
-        self.add_age_text = tkinter.Label(self.add_db_entry_frame,
-                                          text="Student's Age: ")
+        self.add_age_text = tkinter.Label(self.add_age_frame,
+                                          text=gui_str_justification("Student's Age:"))
 
         # Creates the variable for the upcoming radiobuttons
         self.radio_button_var = tkinter.IntVar()
         self.radio_button_var.set(1)
 
         # Adds the new student's gender radiobutton (male) to the GUI
-        self.add_gender_male_radiobutton = tkinter.Radiobutton(self.add_db_entry_frame,
+        self.add_gender_male_radiobutton = tkinter.Radiobutton(self.add_gender_frame,
                                                                value=1,
                                                                text="Male",
                                                                width=10,
                                                                variable=self.radio_button_var)
 
         # Adds the new student's gender radiobutton (female) to the GUI
-        self.add_gender_female_radiobutton = tkinter.Radiobutton(self.add_db_entry_frame,
+        self.add_gender_female_radiobutton = tkinter.Radiobutton(self.add_gender_frame,
                                                                  value=2,
                                                                  text="Female",
                                                                  width=10,
                                                                  variable=self.radio_button_var)
 
         # Adds the new student's gender text to the GUI
-        self.add_gender_text = tkinter.Label(self.add_db_entry_frame,
-                                             text="Student's Gender: ")
+        self.add_gender_text = tkinter.Label(self.add_gender_frame,
+                                             text=gui_str_justification(f"Student's Gender:"))
 
         # Adds the new student's country textbox to the GUI
-        self.add_country_textbox = tkinter.Entry(self.add_db_entry_frame,
+        self.add_country_textbox = tkinter.Entry(self.add_country_frame,
                                                  width=15)
 
         # Adds the new student's country text to the GUI
-        self.add_country_text = tkinter.Label(self.add_db_entry_frame,
-                                              text="Student's Country: ")
+        self.add_country_text = tkinter.Label(self.add_country_frame,
+                                              text="Student's Country:")
 
         # Adds the new student's timezone textbox to the GUI
-        self.add_timezone_textbox = tkinter.Entry(self.add_db_entry_frame,
-                                                  width=15)
+        self.add_timezone_textbox = tkinter.Entry(self.add_timezone_frame,
+                                                  width=15, justify='left')
 
         # Adds the new student's timezone text to the GUI
-        self.add_timezone_text = tkinter.Label(self.add_db_entry_frame,
-                                               text="Student's Timezone: ")
+        self.add_timezone_text = tkinter.Label(self.add_timezone_frame,
+                                               text=gui_str_justification("Student's Timezone:"))
 
         # Adds the new student's email textbox to the GUI
-        self.add_email_textbox = tkinter.Entry(self.add_db_entry_frame,
-                                               width=25)
+        self.add_email_textbox = tkinter.Entry(self.add_email_frame,
+                                               width=30, justify='left')
 
         # Adds the new student's email text to the GUI
-        self.add_email_text = tkinter.Label(self.add_db_entry_frame,
-                                            text="Student's Email: ")
+        self.add_email_text = tkinter.Label(self.add_email_frame,
+                                            text=gui_str_justification("Student's Email:"),
+                                            justify='left',
+                                            anchor='w')
 
         # Creates a button to add a student to the database
-        self.add_student_button = tkinter.Button(self.add_db_entry_frame,
+        self.add_student_button = tkinter.Button(self.add_student_frame,
                                                  text="Add Student",
                                                  command=self.add_student)
 
@@ -254,29 +280,29 @@ class DBGUI:
 
         # Adds the text, textboxes, radiobuttons, and standard button for the "add_student" method to the GUI
         # Adds the name text and textbox to the GUI
-        self.add_name_text.pack()
-        self.add_name_textbox.pack()
+        self.add_name_text.pack(side='left')
+        self.add_name_textbox.pack(anchor='w')
 
         # Adds the age text and textbox to the GUI
-        self.add_age_text.pack()
-        self.add_age_textbox.pack()
+        self.add_age_text.pack(side='left')
+        self.add_age_textbox.pack(anchor='w')
 
         # Adds the gender text and radiobuttons to the GUI
-        self.add_gender_text.pack()
-        self.add_gender_male_radiobutton.pack()
-        self.add_gender_female_radiobutton.pack()
+        self.add_gender_text.pack(side='left')
+        self.add_gender_male_radiobutton.pack(anchor='w')
+        self.add_gender_female_radiobutton.pack(anchor='w')
 
         # Adds the country text and textbox to the GUI
-        self.add_country_text.pack()
-        self.add_country_textbox.pack()
+        self.add_country_text.pack(side='left')
+        self.add_country_textbox.pack(anchor='w')
 
         # Adds the timezone text and textbox to the GUI
-        self.add_timezone_text.pack()
-        self.add_timezone_textbox.pack()
+        self.add_timezone_text.pack(side='left')
+        self.add_timezone_textbox.pack(anchor='w')
 
         # Adds the email text and textbox to the GUI
-        self.add_email_text.pack()
-        self.add_email_textbox.pack()
+        self.add_email_text.pack(side='left')
+        self.add_email_textbox.pack(anchor='w')
 
         # Adds the "Add Student" button to the GUI
         self.add_student_button.pack()
@@ -328,10 +354,6 @@ class DBGUI:
                                        str(self.add_country_textbox.get().ljust(GUI_text_justification, " ")),
                                        str(self.add_timezone_textbox.get().ljust(GUI_text_justification, " ")),
                                        str(self.add_email_textbox.get().ljust(GUI_email_text_justification, " ")))
-
-        # Gets the updated database info and formats it
-        self.db_entries = str(final_db_functions.get_students()[final_db_functions.get_students().__len__() - 1])
-        self.db_entries = db_str_formatting(self.db_entries)
 
         # Adds the formatted database info to the GUI
         self.db_gui_formatting(final_db_functions.get_students())
@@ -390,7 +412,7 @@ class DBGUI:
 
     # todo This is the method you will be working on, Caleb (You can replace this comment with somthing like "Coded by: Caleb Harding" once you finish it)
     def remove_db_entry(self):
-        self.button_frame.destroy()
+        return
 
 
 if __name__ == '__main__':
