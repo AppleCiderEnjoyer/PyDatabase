@@ -127,16 +127,16 @@ class DBGUI:
         # Formats the Database info
         self.db_entries = final_db_functions.get_students()
 
-        #
+        # Creates the scrollbox (Listbox) for the database
         self.db_scrollbox = tkinter.Listbox(self.db_frame,
                                             justify='left',
-                                            height=10,
+                                            height=15,
                                             width=100)
-        #
+        # Creates the scrollbar for the database
         self.db_scrollbar = tkinter.Scrollbar(self.db_frame,
                                               orient=tkinter.VERTICAL)
 
-        #
+        # Configures the scrollbox and scrollbar
         self.db_scrollbar.config(command=self.db_scrollbox.yview)
         self.db_scrollbox.config(yscrollcommand=self.db_scrollbar.set)
 
@@ -149,11 +149,6 @@ class DBGUI:
         self.edit_db_entry_button = tkinter.Button(self.button_frame,
                                                    text="Edit Database Entry",
                                                    command=self.edit_db_entry)
-
-        # Creates a button to add info into the database
-        self.add_db_entry_button = tkinter.Button(self.button_frame,
-                                                  text="Add Database Entry",
-                                                  command=self.add_db_entry)
 
         # Creates a button to remove info from the database
         self.remove_db_entry_button = tkinter.Button(self.button_frame,
@@ -168,27 +163,26 @@ class DBGUI:
         self.intro_text.pack(side='top')
 
         # Adds the database information to the GUI
-        # self.db_entries.pack()
         self.db_scrollbox.pack(side='left')
         self.db_scrollbar.pack(side='right', fill=tkinter.Y)
 
         # Adds the buttons to the GUI
         self.edit_db_entry_button.pack(side='left')
-        self.add_db_entry_button.pack(side='left')
         self.remove_db_entry_button.pack()
         self.exit_button.pack()
 
         # Frame packing
         # Adds the frames to the GUI
         self.text_frame.pack()
-        self.db_frame.pack(padx=20)
-        self.button_frame.pack()
-        self.exit_frame.pack()
+        self.db_frame.pack(side='right', padx=20)
+        self.add_db_entry_frame.pack(pady=20)
+        self.exit_frame.pack(side='bottom', pady=20)
+        self.button_frame.pack(side='bottom', padx=20)
 
-        # Lines 160-260 Coded By: Briely Gunn
+        # Section 1 Coded By: Briely Gunn
         # Widgets for adding a student to the database
 
-        # Widgets for the "add_db_entry" and "add_student" methods
+        # Widgets for the "add_student" method
         # Adds the new student's name textbox to the GUI
         self.add_name_textbox = tkinter.Entry(self.add_db_entry_frame,
                                               width=15)
@@ -287,14 +281,6 @@ class DBGUI:
         # Adds the "Add Student" button to the GUI
         self.add_student_button.pack()
 
-        # Lines ???-??? Coded By:
-        # Widgets for editing a student in the database
-        # (Jacob you can put your GUI frame for you method here)
-
-        # Lines ???-??? Coded By:
-        # Widgets for removing a student from the database
-        # (Caleb you can put your GUI frame for your method here)
-
         # Mainloop to make the GUI work
         tkinter.mainloop()
 
@@ -331,14 +317,14 @@ class DBGUI:
     def add_student(self):
         # Gets the new student's gender before they are added to the database
         if self.radio_button_var.get() == 1:
-            self.student_gender = "male"
+            student_gender = "male"
         else:
-            self.student_gender = "female"
+            student_gender = "female"
 
         # Calls the add_students function to add a new student to the database
         final_db_functions.add_student(str(self.add_name_textbox.get()),
                                        int(self.add_age_textbox.get()),
-                                       str(self.student_gender),
+                                       str(student_gender),
                                        str(self.add_country_textbox.get().ljust(GUI_text_justification, " ")),
                                        str(self.add_timezone_textbox.get().ljust(GUI_text_justification, " ")),
                                        str(self.add_email_textbox.get().ljust(GUI_email_text_justification, " ")))
@@ -346,34 +332,12 @@ class DBGUI:
         # Gets the updated database info and formats it
         self.db_entries = str(final_db_functions.get_students()[final_db_functions.get_students().__len__() - 1])
         self.db_entries = db_str_formatting(self.db_entries)
-        # self.db_info_formatted = self.db_str_formatting(self.db_info)
-
-        # Destroys the erroneous database
-        # self.db_entries.destroy()
 
         # Adds the formatted database info to the GUI
         self.db_gui_formatting(final_db_functions.get_students())
+
+        # Refreshes the database scrollbox
         self.refresh_db_info()
-        # Packs the database info to the GUI
-
-        # Unpacks the add_db_entry_frame for a cleaner GUI
-        self.add_db_entry_frame.pack_forget()
-        self.db_frame.pack_forget()
-
-        # Repacks the exit and button frames
-        self.db_frame.pack()
-        self.button_frame.pack()
-        self.exit_frame.pack()
-
-    # Method to prepare for a new database entry when the "Add Database Entry" button is clicked
-    def add_db_entry(self):
-
-        # Unpacks the exit and button frames
-        self.button_frame.pack_forget()
-        self.exit_frame.pack_forget()
-
-        # Packs the add_db_entry_frame
-        self.add_db_entry_frame.pack()
 
     # Method to refresh database
     def refresh_db_info(self):
@@ -424,7 +388,7 @@ class DBGUI:
             else:
                 messagebox.showinfo("Error", f"No student found with ID: {student_id_to_edit}")
 
-    # This is the method you will be working on, Caleb (You can replace this comment with somthing like "Coded by: Caleb Harding" once you finish it)
+    # todo This is the method you will be working on, Caleb (You can replace this comment with somthing like "Coded by: Caleb Harding" once you finish it)
     def remove_db_entry(self):
         self.button_frame.destroy()
 
