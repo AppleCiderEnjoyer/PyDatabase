@@ -6,15 +6,19 @@ import final_db_functions
 from tkinter import simpledialog, messagebox, END
 
 # Text justification variable for GUI spacing
-GUI_text_justification = 20
-GUI_email_text_justification = 40
+GUI_text_justification_l = 20
+GUI_text_justification_r = 20
 
 
 # Functions
-# Function to justify all needed strings
-def gui_str_justification(string: str):
-    return string.ljust(GUI_text_justification, " ")
+# Function to left justify all needed strings
+def gui_str_justification_left(string: str):
+    return string.ljust(GUI_text_justification_l, " ")
 
+
+# Function to right justify all needed strings
+def gui_str_justification_right(string: str):
+    return string.rjust(GUI_text_justification_r, " ")
 
 # Function to format the database table into readable text
 def db_str_formatting(string):
@@ -131,12 +135,12 @@ class DBGUI:
         # Database text
         # Formats the database columns
         self.db_text = f"ID#:" + \
-                       "\t Name:".ljust(GUI_text_justification, " ") + \
+                       "\t Name:".ljust(GUI_text_justification_l, " ") + \
                        "\t Age:" \
                        "\t Gender:" \
-                       "\t Country:".ljust(GUI_text_justification, " ") + \
-                       "\t Timezone:".ljust(GUI_text_justification, " ") + \
-                       "\t\t Email:\n".ljust(GUI_email_text_justification, " ")
+                       "\t Country:".ljust(GUI_text_justification_l, " ") + \
+                       "\t Timezone:".ljust(GUI_text_justification_l, " ") + \
+                       "\t\t Email:\n".ljust(GUI_text_justification_l, " ")
 
         # Formats the Database info
         self.db_entries = final_db_functions.get_students()
@@ -170,7 +174,8 @@ class DBGUI:
                                                      command=self.remove_db_entry)
 
         # Creates a button to quit the program
-        self.exit_button = tkinter.Button(self.exit_frame, text="Exit", command=self.window.destroy)
+        self.exit_button = tkinter.Button(self.exit_frame, text="Exit",
+                                          command=self.window.destroy)
 
         # Packing
         # Adds the text to the GUI
@@ -214,7 +219,8 @@ class DBGUI:
 
         # Adds the new student's name text to the GUI
         self.add_name_text = tkinter.Label(self.add_name_frame,
-                                           text=gui_str_justification("Student's Name:"))
+                                           text=gui_str_justification_right("Student's Name:\t"),
+                                           justify='right')
 
         # Adds the new student's age textbox to the GUI
         self.add_age_textbox = tkinter.Entry(self.add_age_frame,
@@ -222,7 +228,8 @@ class DBGUI:
 
         # Adds the new student's age text to the GUI
         self.add_age_text = tkinter.Label(self.add_age_frame,
-                                          text=gui_str_justification("Student's Age:"))
+                                          text=gui_str_justification_right("Student's Age:\t"),
+                                          justify='right')
 
         # Creates the variable for the upcoming radiobuttons
         self.radio_button_var = tkinter.IntVar()
@@ -244,7 +251,8 @@ class DBGUI:
 
         # Adds the new student's gender text to the GUI
         self.add_gender_text = tkinter.Label(self.add_gender_frame,
-                                             text=gui_str_justification(f"Student's Gender:"))
+                                             text=gui_str_justification_right(f"Student's Gender:\t"),
+                                             justify='right')
 
         # Adds the new student's country textbox to the GUI
         self.add_country_textbox = tkinter.Entry(self.add_country_frame,
@@ -252,7 +260,8 @@ class DBGUI:
 
         # Adds the new student's country text to the GUI
         self.add_country_text = tkinter.Label(self.add_country_frame,
-                                              text="Student's Country:")
+                                              text=gui_str_justification_right("Student's Country:\t"),
+                                              justify='right')
 
         # Adds the new student's timezone textbox to the GUI
         self.add_timezone_textbox = tkinter.Entry(self.add_timezone_frame,
@@ -260,7 +269,8 @@ class DBGUI:
 
         # Adds the new student's timezone text to the GUI
         self.add_timezone_text = tkinter.Label(self.add_timezone_frame,
-                                               text=gui_str_justification("Student's Timezone:"))
+                                               text=gui_str_justification_right("Student's Timezone:\t"),
+                                               justify='right')
 
         # Adds the new student's email textbox to the GUI
         self.add_email_textbox = tkinter.Entry(self.add_email_frame,
@@ -268,9 +278,8 @@ class DBGUI:
 
         # Adds the new student's email text to the GUI
         self.add_email_text = tkinter.Label(self.add_email_frame,
-                                            text=gui_str_justification("Student's Email:"),
-                                            justify='left',
-                                            anchor='w')
+                                            text=gui_str_justification_right("Student's Email:\t"),
+                                            justify='right')
 
         # Creates a button to add a student to the database
         self.add_student_button = tkinter.Button(self.add_student_frame,
@@ -329,12 +338,12 @@ class DBGUI:
             db_str_formatting(db_age)
             db_str_formatting(db_gender)
 
-            db_row = (f"{db_id}".ljust(GUI_text_justification, " ") +
-                      f"\t{db_name}".ljust(GUI_text_justification, " ") +
-                      f"\t{db_age}".ljust(GUI_text_justification, " ") +
-                      f"\t{db_gender}".ljust(GUI_text_justification, " ") +
-                      f"\t{db_state}".ljust(GUI_text_justification, " ") +
-                      f"\t{db_timezone}".ljust(GUI_text_justification, " ") +
+            db_row = (f"{db_id}".ljust(GUI_text_justification_l, " ") +
+                      f"\t{db_name}".ljust(GUI_text_justification_l, " ") +
+                      f"\t{db_age}".ljust(GUI_text_justification_l, " ") +
+                      f"\t{db_gender}".ljust(GUI_text_justification_l, " ") +
+                      f"\t{db_state}".ljust(GUI_text_justification_l, " ") +
+                      f"\t{db_timezone}".ljust(GUI_text_justification_l, " ") +
                       f"\t{db_email}")
 
             self.db_scrollbox.insert(tkinter.END, db_row)
@@ -352,9 +361,9 @@ class DBGUI:
         final_db_functions.add_student(str(self.add_name_textbox.get()),
                                        int(self.add_age_textbox.get()),
                                        str(student_gender),
-                                       str(self.add_country_textbox.get().ljust(GUI_text_justification, " ")),
-                                       str(self.add_timezone_textbox.get().ljust(GUI_text_justification, " ")),
-                                       str(self.add_email_textbox.get().ljust(GUI_email_text_justification, " ")))
+                                       str(self.add_country_textbox.get().ljust(GUI_text_justification_l, " ")),
+                                       str(self.add_timezone_textbox.get().ljust(GUI_text_justification_l, " ")),
+                                       str(self.add_email_textbox.get().ljust(GUI_text_justification_l, " ")))
 
         # Adds the formatted database info to the GUI
         self.db_gui_formatting(final_db_functions.get_students())
