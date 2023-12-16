@@ -95,6 +95,7 @@ class IntroGUI:
 # GUI for displaying all the database information
 class DBGUI:
     def __init__(self):
+        self.db_info = []
         self.window = tkinter.Tk()
 
         # Prints the title of the window
@@ -363,10 +364,10 @@ class DBGUI:
 
     # Method to refresh database
     def refresh_db_info(self):
-        db_info = final_db_functions.get_students()
+        self.db_info = final_db_functions.get_students()
 
         self.db_scrollbox.delete(0, END)
-        self.db_gui_formatting(db_info)
+        self.db_gui_formatting(self.db_info)
 
     # Coded by: Jacob Goncharenko
     # Method to edit an existing database entry when the "Edit Database Entry" button is clicked
@@ -410,9 +411,22 @@ class DBGUI:
             else:
                 messagebox.showinfo("Error", f"No student found with ID: {student_id_to_edit}")
 
-    # todo This is the method you will be working on, Caleb (You can replace this comment with somthing like "Coded by: Caleb Harding" once you finish it)
+    # Coded by Caleb Harding
+    # Method to remove a database entry
     def remove_db_entry(self):
-        return
+        # Gets the selected database entry from the scrollbox
+        indexes = self.db_scrollbox.curselection()
+
+        if len(indexes) > 0:
+
+            for index in indexes:
+                if index > 0:
+                    final_db_functions.remove_student(self.db_entries[index][0])
+
+            self.refresh_db_info()
+
+        else:
+            tkinter.messagebox.showinfo(message="No entry selected.")
 
 
 if __name__ == '__main__':
