@@ -3,7 +3,7 @@
 
 import tkinter
 import final_db_functions
-from tkinter import simpledialog, messagebox
+from tkinter import simpledialog, messagebox, END
 
 # Text justification variable for GUI spacing
 GUI_text_justification = 20
@@ -116,16 +116,13 @@ class DBGUI:
 
         # Database text
         # Formats the database columns
-        self.db_text = tkinter.Label(self.db_frame,
-                                     text=f"ID#:"
-                                          "\t Name:".ljust(GUI_text_justification, " ") +
-                                          "\t Age:"
-                                          "\t Gender:"
-                                          "\t Country:".ljust(GUI_text_justification, " ") +
-                                          "\t Timezone:".ljust(GUI_text_justification, " ") +
-                                          "\t\t Email:\n".ljust(GUI_email_text_justification, " "),
-                                     justify='left',
-                                     anchor='w', width=100)
+        self.db_text = f"ID#:" + \
+                       "\t Name:".ljust(GUI_text_justification, " ") + \
+                       "\t Age:" \
+                       "\t Gender:" \
+                       "\t Country:".ljust(GUI_text_justification, " ") + \
+                       "\t Timezone:".ljust(GUI_text_justification, " ") + \
+                       "\t\t Email:\n".ljust(GUI_email_text_justification, " ")
 
         # Formats the Database info
         self.db_entries = final_db_functions.get_students()
@@ -305,7 +302,6 @@ class DBGUI:
     def db_gui_formatting(self, db_info: list):
 
         for row in db_info:
-
             # Gets the fields in the selected row
             db_id = str(row[0])
             db_name = str(row[1])
@@ -379,17 +375,12 @@ class DBGUI:
         # Packs the add_db_entry_frame
         self.add_db_entry_frame.pack()
 
-    # Methon to refresh database
+    # Method to refresh database
     def refresh_db_info(self):
-            self.db_info = str(final_db_functions.get_students())
-            self.db_info_formatted = self.db_str_formatting(self.db_info)
+        db_info = final_db_functions.get_students()
 
-            self.db_entries.destroy()
-            self.db_entries = tkinter.Label(self.db_frame,
-                                            text=self.db_info_formatted,
-                                            justify='left',
-                                            anchor='w', width=100)
-            self.db_entries.pack()
+        self.db_scrollbox.delete(0, END)
+        self.db_gui_formatting(db_info)
 
     # Coded by: Jacob Goncharenko
     # Method to edit an existing database entry when the "Edit Database Entry" button is clicked
@@ -432,7 +423,6 @@ class DBGUI:
                 edit_window.mainloop()
             else:
                 messagebox.showinfo("Error", f"No student found with ID: {student_id_to_edit}")
-
 
     # This is the method you will be working on, Caleb (You can replace this comment with somthing like "Coded by: Caleb Harding" once you finish it)
     def remove_db_entry(self):
