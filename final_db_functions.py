@@ -63,9 +63,20 @@ def add_student(student_name: str, student_age: int, student_gender: str,
 
 
 # Function to edit a student's info in the database
-def edit_student(student_id: int):
-    # Uses variables to connect to the database
+def edit_student(student_id: int, updated_values: dict):
     cursor, connection = get_connection()
+
+    cursor.execute("UPDATE students SET "
+                   "student_name=?, student_age=?, "
+                   "student_gender=?, student_country=?, student_timezone=?, "
+                   "student_email=? WHERE student_id=?",
+                   (updated_values["name"], updated_values["age"],
+                    updated_values["gender"], updated_values["country"],
+                    updated_values["timezone"], updated_values["email"],
+                    student_id))
+
+    connection.commit()
+    connection.close()
 
 
 # Function to remove a student's info from the database
@@ -73,6 +84,13 @@ def remove_student(student_id: int):
     # Uses variables to connect to the database
     cursor, connection = get_connection()
 
+    delete_id = input(int("Enter student id for student you want to remove: "))
+    for row in cursor.execute('SELECT student_id FROM students'):
+        if student_id == delete_id:
+            cursor.execute('DELETE FROM students WHERE student_id = delete_id')
+    connection.commit()
+    connection.close()
+    
 
 # Function to get the students in the student table and print them
 def get_students():
