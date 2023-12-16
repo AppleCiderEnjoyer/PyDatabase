@@ -63,9 +63,20 @@ def add_student(student_name: str, student_age: int, student_gender: str,
 
 
 # Function to edit a student's info in the database
-def edit_student(student_id: int):
-    # Uses variables to connect to the database
+def edit_student(student_id: int, updated_values: dict):
     cursor, connection = get_connection()
+
+    cursor.execute("UPDATE students SET "
+                   "student_name=?, student_age=?, "
+                   "student_gender=?, student_country=?, student_timezone=?, "
+                   "student_email=? WHERE student_id=?",
+                   (updated_values["name"], updated_values["age"],
+                    updated_values["gender"], updated_values["country"],
+                    updated_values["timezone"], updated_values["email"],
+                    student_id))
+
+    connection.commit()
+    connection.close()
 
 
 # Function to remove a student's info from the database
