@@ -83,11 +83,9 @@ def edit_student(student_id: int, updated_values: dict):
 def remove_student(student_id: int):
     # Uses variables to connect to the database
     cursor, connection = get_connection()
-
-    delete_id = input(int("Enter student id for student you want to remove: "))
-    for row in cursor.execute('SELECT student_id FROM students'):
-        if student_id == delete_id:
-            cursor.execute('DELETE FROM students WHERE student_id = delete_id')
+    
+    cursor.execute("DELETE FROM students WHERE student_id = ' + str(student_id)'")
+    
     connection.commit()
     connection.close()
     
