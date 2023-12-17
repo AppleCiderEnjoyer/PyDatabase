@@ -1,9 +1,9 @@
-# Final Project: Week 13 (Team) (GUI)
+# Final Project: Week 14 (Team) (GUI)
 # Coded by Briely Gunn Jacob Goncharenko, and Caleb Harding
 
 import tkinter
-import final_db_functions
 from tkinter import simpledialog, messagebox, END
+import final_db_functions
 
 # Text justification variable for GUI spacing
 GUI_text_justification_l = 20
@@ -135,13 +135,13 @@ class DBGUI:
 
         # Database text
         # Formats the database columns
-        self.db_text = f"ID#:" + \
-                       "\t\t\tName:" + \
-                       "\t\tAge:" + \
-                       "\tGender:" + \
-                       "\t\tCountry:" + \
-                       "\t Timezone:" + \
-                       "\t\t Email:\n"
+        self.db_text = ("ID#:".ljust(10) +
+                        "Name:".ljust(25) +
+                        "Age:".ljust(10) +
+                        "Gender:".ljust(15) +
+                        "Country:".ljust(20) +
+                        "Timezone:".ljust(25) +
+                        "Email:".ljust(30))
 
         # Formats the Database info
         self.db_entries = final_db_functions.get_students()
@@ -323,9 +323,11 @@ class DBGUI:
 
     # Method to format database entries for the scrollbox
     def db_gui_formatting(self, db_info: list):
+        # gets each column's width
+        column_widths = [10, 25, 10, 15, 20, 20, 30]
 
         for row in db_info:
-            # Gets the fields in the selected row
+            # Get the fields in the selected row
             db_id = str(row[0])
             db_name = str(row[1])
             db_age = str(row[2])
@@ -334,20 +336,17 @@ class DBGUI:
             db_timezone = str(row[5])
             db_email = str(row[6])
 
-            # Formats the tuples in a database row
-            db_str_formatting(db_id)
-            db_str_formatting(db_name)
-            db_str_formatting(db_age)
-            db_str_formatting(db_gender)
-
             # Justifies the tuples
-            db_row = (f"{db_id}".ljust(GUI_text_justification_l, " ") +
-                      f"\t{db_name}".ljust(GUI_text_justification_l, " ") +
-                      f"\t{db_age}".ljust(GUI_text_justification_l, " ") +
-                      f"\t{db_gender}".ljust(GUI_text_justification_l, " ") +
-                      f"\t{db_state}".ljust(GUI_text_justification_l, " ") +
-                      f"\t{db_timezone}".ljust(GUI_text_justification_l, " ") +
-                      f"\t{db_email}")
+            formatted_row = [db_id.ljust(column_widths[0]),
+                             db_name.ljust(column_widths[1]),
+                             db_age.ljust(column_widths[2]),
+                             db_gender.ljust(column_widths[3]),
+                             db_state.ljust(column_widths[4]),
+                             db_timezone.ljust(column_widths[5]),
+                             db_email.ljust(column_widths[6])]
+
+            # Joins the formatted tuples into a single string
+            db_row = "".join(formatted_row)
 
             # Adds the tuples to the scrollbox
             self.db_scrollbox.insert(tkinter.END, db_row)
