@@ -334,11 +334,13 @@ class DBGUI:
             db_timezone = str(row[5])
             db_email = str(row[6])
 
+            # Formats the tuples in a database row
             db_str_formatting(db_id)
             db_str_formatting(db_name)
             db_str_formatting(db_age)
             db_str_formatting(db_gender)
 
+            # Justifies the tuples
             db_row = (f"{db_id}".ljust(GUI_text_justification_l, " ") +
                       f"\t{db_name}".ljust(GUI_text_justification_l, " ") +
                       f"\t{db_age}".ljust(GUI_text_justification_l, " ") +
@@ -347,6 +349,7 @@ class DBGUI:
                       f"\t{db_timezone}".ljust(GUI_text_justification_l, " ") +
                       f"\t{db_email}")
 
+            # Adds the tuples to the scrollbox
             self.db_scrollbox.insert(tkinter.END, db_row)
 
     # Coded by: Briely Gunn
@@ -365,6 +368,10 @@ class DBGUI:
                                        str(self.add_country_textbox.get().ljust(GUI_text_justification_l, " ")),
                                        str(self.add_timezone_textbox.get().ljust(GUI_text_justification_l, " ")),
                                        str(self.add_email_textbox.get().ljust(GUI_text_justification_l, " ")))
+
+        # Updates the database entry to prevent errors when removing a student
+        self.db_info = final_db_functions.get_students()
+        self.db_entries = self.db_info
 
         # Adds the formatted database info to the GUI
         self.db_gui_formatting(final_db_functions.get_students())
@@ -427,15 +434,29 @@ class DBGUI:
         # Gets the selected database entry from the scrollbox
         indexes = self.db_scrollbox.curselection()
 
+        # Checks to make sure the scrollbox title will not be deleted
         if len(indexes) > 0:
 
-            for index in indexes:
+            # Gets the selected row from the user
+            for index in reversed(indexes):
+                # Gets the student index in the database to remove
                 if index > 0:
                     student_id = self.db_entries[index - 1][0]
-                    final_db_functions.remove_student(student_id)
+                # Gets the student index in the database to remove if there is 2 or fewer entries
+                else:
+                    student_id = self.db_entries[index][0]
 
+                # Removes the selected row
+                final_db_functions.remove_student(student_id)
+
+            # Updates the database entries after they are removed
+            self.db_info = final_db_functions.get_students()
+            self.db_entries = self.db_info
+
+            # refreshes the scrollbox
             self.refresh_db_info()
 
+        # Displays if no database entry is selected
         else:
             tkinter.messagebox.showinfo(message="No entry selected.")
 
