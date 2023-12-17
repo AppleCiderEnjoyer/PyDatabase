@@ -210,9 +210,6 @@ class DBGUI:
         self.exit_frame.pack(side='bottom', pady=20)
         self.button_frame.pack(side='bottom', padx=20)
 
-        # Section 1 Coded By: Briely Gunn
-        # Widgets for adding a student to the database
-
         # Widgets for the "add_student" method
         # Adds the new student's name textbox to the GUI
         self.add_name_textbox = tkinter.Entry(self.add_name_frame,
