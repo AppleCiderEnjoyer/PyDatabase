@@ -84,7 +84,7 @@ def remove_student(student_id: int):
     # Uses variables to connect to the database
     cursor, connection = get_connection()
     
-    cursor.execute("DELETE FROM students WHERE student_id = ' + str(student_id)'")
+    cursor.execute("DELETE FROM students WHERE student_id = ?", (student_id,))
     
     connection.commit()
     connection.close()
