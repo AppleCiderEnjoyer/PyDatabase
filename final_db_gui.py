@@ -20,6 +20,7 @@ def gui_str_justification_left(string: str):
 def gui_str_justification_right(string: str):
     return string.rjust(GUI_text_justification_r, " ")
 
+
 # Function to format the database table into readable text
 def db_str_formatting(string):
     string_formatted = (str(string)
@@ -135,12 +136,12 @@ class DBGUI:
         # Database text
         # Formats the database columns
         self.db_text = f"ID#:" + \
-                       "\t Name:".ljust(GUI_text_justification_l, " ") + \
-                       "\t Age:" \
-                       "\t Gender:" \
-                       "\t Country:".ljust(GUI_text_justification_l, " ") + \
-                       "\t Timezone:".ljust(GUI_text_justification_l, " ") + \
-                       "\t\t Email:\n".ljust(GUI_text_justification_l, " ")
+                       "\t\t\tName:" + \
+                       "\t\tAge:" + \
+                       "\tGender:" + \
+                       "\t\tCountry:" + \
+                       "\t Timezone:" + \
+                       "\t\t Email:\n"
 
         # Formats the Database info
         self.db_entries = final_db_functions.get_students()
@@ -375,7 +376,7 @@ class DBGUI:
     def refresh_db_info(self):
         self.db_info = final_db_functions.get_students()
 
-        self.db_scrollbox.delete(0, END)
+        self.db_scrollbox.delete(1, END)
         self.db_gui_formatting(self.db_info)
 
     # Coded by: Jacob Goncharenko
@@ -430,7 +431,8 @@ class DBGUI:
 
             for index in indexes:
                 if index > 0:
-                    final_db_functions.remove_student(self.db_entries[index][0])
+                    student_id = self.db_entries[index - 1][0]
+                    final_db_functions.remove_student(student_id)
 
             self.refresh_db_info()
 
