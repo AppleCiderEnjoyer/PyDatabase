@@ -451,7 +451,7 @@ class DBGUI:
 
         # Displays if no database entry is selected
         else:
-             messagebox.showinfo("Error", f"No entry selected.")
+            messagebox.showinfo("Error", f"No entry selected.")
 
 
 if __name__ == '__main__':
