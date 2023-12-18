@@ -2,7 +2,7 @@
 # Coded by Briely Gunn Jacob Goncharenko, and Caleb Harding
 
 import tkinter
-from tkinter import simpledialog, messagebox, END
+from tkinter import messagebox, END
 import final_db_functions
 
 # Text justification variable for GUI spacing
@@ -361,9 +361,9 @@ class DBGUI:
         final_db_functions.add_student(str(self.add_name_textbox.get()),
                                        int(self.add_age_textbox.get()),
                                        str(student_gender),
-                                       str(self.add_country_textbox.get().ljust(GUI_text_justification_l, " ")),
-                                       str(self.add_timezone_textbox.get().ljust(GUI_text_justification_l, " ")),
-                                       str(self.add_email_textbox.get().ljust(GUI_text_justification_l, " ")))
+                                       str(self.add_country_textbox.get()),
+                                       str(self.add_timezone_textbox.get()),
+                                       str(self.add_email_textbox.get()))
 
         # Updates the database entry to prevent errors when removing a student
         self.db_info = final_db_functions.get_students()
@@ -385,9 +385,11 @@ class DBGUI:
     # Coded by: Jacob Goncharenko
     # Method to edit an existing database entry when the "Edit Database Entry" button is clicked
     def edit_db_entry(self):
-        student_id_to_edit = simpledialog.askinteger("Edit Student", "Enter the student ID to edit:")
+        index = self.db_scrollbox.curselection()
 
-        if student_id_to_edit is not None:
+        if index and index[0] != 0:
+            student_id_to_edit = self.db_entries[index[0] - 1][0]
+
             cursor, connection = final_db_functions.get_connection()
             cursor.execute("SELECT * FROM students WHERE student_id=?", (student_id_to_edit,))
             student_info = cursor.fetchone()
@@ -422,28 +424,23 @@ class DBGUI:
 
                 edit_window.mainloop()
             else:
-                messagebox.showinfo("Error", f"No student found with ID: {student_id_to_edit}")
+                messagebox.showinfo("Error", f"Invalid Student")
+        else:
+            messagebox.showinfo("Error", f"No entry selected.")
 
     # Coded by Caleb Harding
     # Method to remove a database entry
     def remove_db_entry(self):
         # Gets the selected database entry from the scrollbox
-        indexes = self.db_scrollbox.curselection()
+        index = self.db_scrollbox.curselection()
 
-        # Checks to make sure the scrollbox title will not be deleted
-        if len(indexes) > 0:
+        # Checks if a entry is selected
+        if index and index[0] != 0:
+            # Gets ID from entry
+            student_id = self.db_entries[index[0] - 1][0]
 
-            # Gets the selected row from the user
-            for index in reversed(indexes):
-                # Gets the student index in the database to remove
-                if index > 0:
-                    student_id = self.db_entries[index - 1][0]
-                # Gets the student index in the database to remove if there is 2 or fewer entries
-                else:
-                    student_id = self.db_entries[index][0]
-
-                # Removes the selected row
-                final_db_functions.remove_student(student_id)
+            # Removes the selected row
+            final_db_functions.remove_student(student_id)
 
             # Updates the database entries after they are removed
             self.db_info = final_db_functions.get_students()
@@ -454,7 +451,7 @@ class DBGUI:
 
         # Displays if no database entry is selected
         else:
-            tkinter.messagebox.showinfo(message="No entry selected.")
+             messagebox.showinfo("Error", f"No entry selected.")
 
 
 if __name__ == '__main__':
