@@ -183,6 +183,7 @@ class DBGUI:
 
         # Configures the scrollbar
         self.db_scrollbar.config(command=self.db_treeview.yview)
+        self.db_treeview.configure(yscrollcommand=self.db_scrollbar.set)
 
         # Formats the Database info
         self.db_entries = final_db_functions.get_students()
