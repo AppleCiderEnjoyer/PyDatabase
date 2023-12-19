@@ -142,17 +142,17 @@ class DBGUI:
         self.db_treeview.heading("ID",
                                  text="ID#")
         self.db_treeview.heading("Name",
-                                 text="Name")
+                                 text="Name".upper())
         self.db_treeview.heading("Age",
-                                 text="Age")
+                                 text="Age".upper())
         self.db_treeview.heading("Gender",
-                                 text="Gender")
+                                 text="Gender".upper())
         self.db_treeview.heading("Country",
-                                 text="Country")
+                                 text="Country".upper())
         self.db_treeview.heading("Timezone",
-                                 text="Timezone")
+                                 text="Timezone".upper())
         self.db_treeview.heading("Email",
-                                 text="Email")
+                                 text="Email".upper())
 
         # Sets the width for each column
         self.db_treeview.column("ID",
@@ -160,27 +160,27 @@ class DBGUI:
                                 anchor="center")
         self.db_treeview.column("Name",
                                 width=150,
-                                anchor="w")
+                                anchor='w')
         self.db_treeview.column("Age",
                                 width=50,
-                                anchor="center")
+                                anchor='center')
         self.db_treeview.column("Gender",
                                 width=80,
-                                anchor="center")
+                                anchor='center')
         self.db_treeview.column("Country",
                                 width=100,
-                                anchor="w")
+                                anchor='w')
         self.db_treeview.column("Timezone",
                                 width=150,
-                                anchor="w")
+                                anchor='w')
         self.db_treeview.column("Email",
                                 width=200,
-                                anchor="w")
+                                anchor='w')
 
-        # Center justifies all the treeview columns
-        for column in ("ID", "Name", "Age", "Gender", "Country", "Timezone", "Email"):
-            self.db_treeview.heading(column, anchor="center")
-            self.db_treeview.column(column, anchor="center")
+        # Center justifies the needed treeview columns
+        for column in ("Name", "Country", "Timezone", "Email"):
+            self.db_treeview.heading(column, anchor='w')
+            self.db_treeview.column(column, anchor='w')
 
         # Creates the scrollbar for the database
         self.db_scrollbar = tkinter.Scrollbar(self.db_frame,
