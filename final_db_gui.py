@@ -1,4 +1,4 @@
-# Final Project: Week 14 (Team) (GUI)
+# Final Project: Week 15 (Team) (GUI)
 # Coded by Briely Gunn Jacob Goncharenko, and Caleb Harding
 
 import tkinter
@@ -132,7 +132,6 @@ class DBGUI:
         # Text
         self.intro_text = tkinter.Label(self.window, text="\nStudent Information Database")
 
-        # todo New Code
         # Creates the treeview for the database
         self.db_treeview = ttk.Treeview(self.db_frame,
                                         columns=("ID", "Name", "Age", "Gender", "Country", "Timezone", "Email"),
@@ -399,7 +398,6 @@ class DBGUI:
         # Refreshes the database treeview
         self.refresh_db_info()
 
-    # todo I tweaked this method a bit to make the treeview work
     # Coded by: Jacob Goncharenko
     # Method to edit an existing database entry when the "Edit Database Entry" button is clicked
     def edit_db_entry(self):
@@ -447,7 +445,6 @@ class DBGUI:
         else:
             messagebox.showinfo("Error", f"No entry selected.")
 
-    # todo I tweaked this method a bit to make the treeview work
     # Coded by Caleb Harding
     # Method to remove a database entry
     def remove_db_entry(self):
