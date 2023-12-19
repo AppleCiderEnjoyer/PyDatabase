@@ -405,9 +405,9 @@ class DBGUI:
     def edit_db_entry(self):
         index = self.db_treeview.selection()
 
-        if index and index[0] != 0:
-            selected_index = int(index[0][1:])
-            student_id_to_edit = self.db_entries[selected_index - 1][0]
+        if index:
+            selected_index = self.db_treeview.index(index[0])
+            student_id_to_edit = self.db_entries[selected_index][0]
 
             cursor, connection = final_db_functions.get_connection()
             cursor.execute("SELECT * FROM students WHERE student_id=?", (student_id_to_edit,))
@@ -455,10 +455,10 @@ class DBGUI:
         index = self.db_treeview.selection()
 
         # Checks if an entry is selected
-        if index and index[0] != 0:
+        if index:
             # Gets ID from entry
-            selected_index = int(index[0][1:])
-            student_id = self.db_entries[selected_index - 1][0]
+            selected_index = self.db_treeview.index(index[0])
+            student_id = self.db_entries[selected_index][0]
 
             # Removes the selected row
             final_db_functions.remove_student(student_id)
