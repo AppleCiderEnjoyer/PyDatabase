@@ -177,6 +177,11 @@ class DBGUI:
                                 width=200,
                                 anchor="w")
 
+        # Center justifies all the treeview columns
+        for column in ("ID", "Name", "Age", "Gender", "Country", "Timezone", "Email"):
+            self.db_treeview.heading(column, anchor="center")
+            self.db_treeview.column(column, anchor="center")
+
         # Creates the scrollbar for the database
         self.db_scrollbar = tkinter.Scrollbar(self.db_frame,
                                               orient=tkinter.VERTICAL)
