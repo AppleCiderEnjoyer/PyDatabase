@@ -2,7 +2,7 @@
 # Coded by Briely Gunn Jacob Goncharenko, and Caleb Harding
 
 import tkinter
-from tkinter import messagebox, END
+from tkinter import ttk, messagebox
 import final_db_functions
 
 # Text justification variable for GUI spacing
@@ -115,7 +115,6 @@ class DBGUI:
 
         # Creates a frame for entering entries
         self.add_db_entry_frame = tkinter.Frame(self.window)
-
         # Creates the frames for the different fields within the entry frame
         self.add_name_frame = tkinter.Frame(self.add_db_entry_frame)
         self.add_age_frame = tkinter.Frame(self.add_db_entry_frame)
@@ -131,37 +130,69 @@ class DBGUI:
         self.exit_frame = tkinter.Frame(self.window)
 
         # Text
-        self.intro_text = tkinter.Label(self.db_frame, text="Student Information Database\n")
+        self.intro_text = tkinter.Label(self.window, text="\nStudent Information Database")
 
-        # Database text
-        # Formats the database columns
-        self.db_text = ("ID#:".ljust(10) +
-                        "Name:".ljust(25) +
-                        "Age:".ljust(10) +
-                        "Gender:".ljust(15) +
-                        "Country:".ljust(20) +
-                        "Timezone:".ljust(25) +
-                        "Email:".ljust(30))
+        # todo New Code
+        # Creates the treeview for the database
+        self.db_treeview = ttk.Treeview(self.db_frame,
+                                        columns=("ID", "Name", "Age", "Gender", "Country", "Timezone", "Email"),
+                                        show="headings", height=15)
 
-        # Formats the Database info
-        self.db_entries = final_db_functions.get_students()
+        # Creates the titles for the columns
+        self.db_treeview.heading("ID",
+                                 text="ID#")
+        self.db_treeview.heading("Name",
+                                 text="Name")
+        self.db_treeview.heading("Age",
+                                 text="Age")
+        self.db_treeview.heading("Gender",
+                                 text="Gender")
+        self.db_treeview.heading("Country",
+                                 text="Country")
+        self.db_treeview.heading("Timezone",
+                                 text="Timezone")
+        self.db_treeview.heading("Email",
+                                 text="Email")
 
-        # Creates the scrollbox (Listbox) for the database
-        self.db_scrollbox = tkinter.Listbox(self.db_frame,
-                                            justify='left',
-                                            height=15,
-                                            width=100)
+        # Sets the width for each column
+        self.db_treeview.column("ID",
+                                width=50,
+                                anchor="center")
+        self.db_treeview.column("Name",
+                                width=150,
+                                anchor="w")
+        self.db_treeview.column("Age",
+                                width=50,
+                                anchor="center")
+        self.db_treeview.column("Gender",
+                                width=80,
+                                anchor="center")
+        self.db_treeview.column("Country",
+                                width=100,
+                                anchor="w")
+        self.db_treeview.column("Timezone",
+                                width=150,
+                                anchor="w")
+        self.db_treeview.column("Email",
+                                width=200,
+                                anchor="w")
+
         # Creates the scrollbar for the database
         self.db_scrollbar = tkinter.Scrollbar(self.db_frame,
                                               orient=tkinter.VERTICAL)
 
-        # Configures the scrollbox and scrollbar
-        self.db_scrollbar.config(command=self.db_scrollbox.yview)
-        self.db_scrollbox.config(yscrollcommand=self.db_scrollbar.set)
+        # Configures the scrollbar
+        self.db_scrollbar.config(command=self.db_treeview.yview)
 
-        # Adds the database entries to the scrollbox
-        self.db_scrollbox.insert(tkinter.END, self.db_text)
+        # Formats the Database info
+        self.db_entries = final_db_functions.get_students()
         self.db_gui_formatting(self.db_entries)
+
+        # Adds the database entries to the treeview
+        self.db_gui_formatting(self.db_entries)
+
+        self.db_treeview.pack(side='bottom', padx=5, pady=5, fill=tkinter.BOTH)
+        self.db_scrollbar.pack(side='right', fill=tkinter.Y)
 
         # Buttons
         # Creates a button to edit info into the database
@@ -183,7 +214,7 @@ class DBGUI:
         self.intro_text.pack(side='top')
 
         # Adds the database information to the GUI
-        self.db_scrollbox.pack(side='left')
+        self.db_treeview.pack(side='left')
         self.db_scrollbar.pack(side='right', fill=tkinter.Y)
 
         # Adds the buttons to the GUI
@@ -318,35 +349,25 @@ class DBGUI:
         # Mainloop to make the GUI work
         tkinter.mainloop()
 
-    # Method to format database entries for the scrollbox
+    # Method to refresh database
+    def refresh_db_info(self):
+        self.db_info = final_db_functions.get_students()
+
+        # Deletes the treeview entries to make way for the refresh
+        self.db_treeview.delete(*self.db_treeview.get_children())
+
+        # Refreshes the treeview
+        for row in self.db_info:
+            self.db_treeview.insert("", "end", values=row)
+
+    # Method to format database entries for the treeview
     def db_gui_formatting(self, db_info: list):
-        # gets each column's width
-        column_widths = [10, 25, 10, 15, 20, 20, 30]
+
+        # Deletes the existing database entries
+        self.db_treeview.delete(*self.db_treeview.get_children())
 
         for row in db_info:
-            # Get the fields in the selected row
-            db_id = str(row[0])
-            db_name = str(row[1])
-            db_age = str(row[2])
-            db_gender = str(row[3])
-            db_state = str(row[4])
-            db_timezone = str(row[5])
-            db_email = str(row[6])
-
-            # Justifies the tuples
-            formatted_row = [db_id.ljust(column_widths[0]),
-                             db_name.ljust(column_widths[1]),
-                             db_age.ljust(column_widths[2]),
-                             db_gender.ljust(column_widths[3]),
-                             db_state.ljust(column_widths[4]),
-                             db_timezone.ljust(column_widths[5]),
-                             db_email.ljust(column_widths[6])]
-
-            # Joins the formatted tuples into a single string
-            db_row = "".join(formatted_row)
-
-            # Adds the tuples to the scrollbox
-            self.db_scrollbox.insert(tkinter.END, db_row)
+            self.db_treeview.insert("", "end", values=row)
 
     # Coded by: Briely Gunn
     # Method to add a student to the database and print it to the GUI when the "Add Student" button is clicked
@@ -369,26 +390,18 @@ class DBGUI:
         self.db_info = final_db_functions.get_students()
         self.db_entries = self.db_info
 
-        # Adds the formatted database info to the GUI
-        self.db_gui_formatting(final_db_functions.get_students())
-
-        # Refreshes the database scrollbox
+        # Refreshes the database treeview
         self.refresh_db_info()
 
-    # Method to refresh database
-    def refresh_db_info(self):
-        self.db_info = final_db_functions.get_students()
-
-        self.db_scrollbox.delete(1, END)
-        self.db_gui_formatting(self.db_info)
-
+    # todo I tweaked this method a bit to make the treeview work
     # Coded by: Jacob Goncharenko
     # Method to edit an existing database entry when the "Edit Database Entry" button is clicked
     def edit_db_entry(self):
-        index = self.db_scrollbox.curselection()
+        index = self.db_treeview.selection()
 
         if index and index[0] != 0:
-            student_id_to_edit = self.db_entries[index[0] - 1][0]
+            selected_index = int(index[0][1:])
+            student_id_to_edit = self.db_entries[selected_index - 1][0]
 
             cursor, connection = final_db_functions.get_connection()
             cursor.execute("SELECT * FROM students WHERE student_id=?", (student_id_to_edit,))
@@ -428,16 +441,18 @@ class DBGUI:
         else:
             messagebox.showinfo("Error", f"No entry selected.")
 
+    # todo I tweaked this method a bit to make the treeview work
     # Coded by Caleb Harding
     # Method to remove a database entry
     def remove_db_entry(self):
-        # Gets the selected database entry from the scrollbox
-        index = self.db_scrollbox.curselection()
+        # Gets the selected database entry from the treeview
+        index = self.db_treeview.selection()
 
-        # Checks if a entry is selected
+        # Checks if an entry is selected
         if index and index[0] != 0:
             # Gets ID from entry
-            student_id = self.db_entries[index[0] - 1][0]
+            selected_index = int(index[0][1:])
+            student_id = self.db_entries[selected_index - 1][0]
 
             # Removes the selected row
             final_db_functions.remove_student(student_id)
@@ -446,7 +461,7 @@ class DBGUI:
             self.db_info = final_db_functions.get_students()
             self.db_entries = self.db_info
 
-            # refreshes the scrollbox
+            # refreshes the treeview
             self.refresh_db_info()
 
         # Displays if no database entry is selected
